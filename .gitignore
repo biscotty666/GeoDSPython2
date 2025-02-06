@@ -1,0 +1,6 @@
+.direnv
+.envrc
+.virtual_documents
+_build
+data
+**/.ipynb_checkpoints
