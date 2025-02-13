@@ -5,3 +5,6 @@ _build
 data
 **/.ipynb_checkpoints
 src
+docs/cache
+images
+html
