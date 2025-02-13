@@ -10,41 +10,48 @@
         devShell = pkgs.mkShell {
           name = "python-venv";
           venvDir = "./.venv";
-          buildInputs = with pkgs;
-            [
-              (python3.withPackages (ps:
-                with ps; [
-                  ipython
-                  pip
-                  jupyter
-                  widgetsnbextension
-                  ipympl
-                  jupyter-nbextensions-configurator
-                  jedi-language-server
-                  plotly
-                  osmnx
-                  ipywidgets
-                  mypy
-                  pandas
-                  us
-                  numpy
-                  geopandas
-                  geodatasets
-                  googlemaps
-                  pyogrio
-                  geopy
-                  matplotlib
-                  pyproj
-                  folium
-                  mapclassify
-                  scipy
-                  shapely
-                  xarray
-                  rioxarray
-                  rasterio
-                  ortools
-                ]))
-            ];
+          buildInputs = with pkgs; [
+            texliveFull
+            firefox
+            geckodriver
+            (python3.withPackages (ps:
+              with ps; [
+                ipython
+                pip
+                jupyter
+                widgetsnbextension
+                ipympl
+                jupyter-nbextensions-configurator
+                jedi-language-server
+                plotly
+                osmnx
+                anywidget
+                ipywidgets
+                owslib
+                mypy
+                pandas
+                us
+                selenium
+                numpy
+                geopandas
+                geodatasets
+                bokeh
+                bokeh-sampledata
+                googlemaps
+                pyogrio
+                geopy
+                matplotlib
+                pyproj
+                folium
+                mapclassify
+                scipy
+                shapely
+                xarray
+                rioxarray
+                rasterio
+                ortools
+              ]))
+          ];
           postVenvCreation = ''
             unset SOURCE_DATE_EPOCH
             pip install -r requirements.txt
@@ -57,6 +64,7 @@
                     export PIP_PREFIX=$(pwd)/_build/pip_packages
                     export PYTHONPATH="$PIP_PREFIX/${pkgs.python3.sitePackages}:$PYTHONPATH"
                     export PATH="$PIP_PREFIX/bin:$PATH"
+                    export BOKEH_BROWSER=/home/biscotty/.nix-profile/bin/brave
                     unset SOURCE_DATE_EPOCH
                     #jupyter lab
           '';
